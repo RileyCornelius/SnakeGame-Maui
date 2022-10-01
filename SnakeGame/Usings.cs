@@ -1,0 +1,9 @@
+﻿global using CommunityToolkit.Mvvm.ComponentModel;
+global using SharpHook;
+global using SnakeGame.Services;
+//global using CommunityToolkit.Maui;
+//global using CommunityToolkit.Mvvm.Input;
+//global using SnakeGame.Models;
+//global using SnakeGame.Services.GameLogic;
+//global using SnakeGame.ViewModels;
+//global using System.Text;
