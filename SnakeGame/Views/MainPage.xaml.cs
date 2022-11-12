@@ -21,12 +21,12 @@ public partial class MainPage : ContentPage
         { Direction.Left, 270},
     };
 
-    int rows = 15, cols = 15;
-    Image[,] gridImages;
-    GameState gameState;
+    private int rows = 15, cols = 15;
+    private Image[,] gridImages;
+    private GameState gameState;
     private bool isGameRunning = false;
 
-    TaskPoolGlobalHook keyboardHook;
+    private TaskPoolGlobalHook keyboardHook;
 
     public MainPage()
     {

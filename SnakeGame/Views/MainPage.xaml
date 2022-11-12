@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SnakeGame">
 
-    <Grid x:Name="ScreenGrid" RowDefinitions="auto,auto,*">
+    <Grid
+        x:Name="ScreenGrid"
+        RowDefinitions="auto,auto,*"
+        BackgroundColor="{StaticResource Gray950}">
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
@@ -17,17 +20,18 @@
         <Label
             x:Name="ScoreText"
             Grid.Row="0"
-            Margin="20"
+            Margin="10,20"
             FontSize="22"
+            TextColor="{StaticResource Gray200}"
             HorizontalTextAlignment="Start"
-            VerticalTextAlignment="Center"
-            Text="Score 0" />
+            VerticalTextAlignment="Center" />
 
         <Label
             x:Name="HighScoreText"
             Grid.Row="0"
-            Margin="10"
+            Margin="10,20"
             FontSize="22"
+            TextColor="{StaticResource Gray200}"
             HorizontalTextAlignment="End"
             VerticalTextAlignment="Center" />
 
@@ -48,18 +52,18 @@
             x:Name="OverlayText"
             Grid.Row="1"
             BackgroundColor="{StaticResource Gray200}"
-            BorderColor="Black"
             FontSize="Title"
             Text="PRESS TO START"
+            TextColor="{StaticResource Tertiary}"
             Pressed="OnPressedStart"
             HeightRequest="70"
             WidthRequest="300" />
+
         <Grid
             x:Name="MovementButtonsGrid"
             Grid.Row="2"
             RowDefinitions="auto,auto,auto"
             ColumnDefinitions="auto,auto,auto"
-            Margin="20"
             HorizontalOptions="Center"
             VerticalOptions="Center">
 
@@ -98,8 +102,8 @@
             <Setter Property="Source" Value="arrow.png" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="HeightRequest" Value="60" />
-            <Setter Property="WidthRequest" Value="60" />
+            <Setter Property="HeightRequest" Value="70" />
+            <Setter Property="WidthRequest" Value="70" />
             <Setter Property="BackgroundColor" Value="{StaticResource Gray200}" />
             <Setter Property="CornerRadius" Value="10" />
         </Style>
