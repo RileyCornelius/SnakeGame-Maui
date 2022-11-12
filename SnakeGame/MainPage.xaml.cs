@@ -2,7 +2,8 @@
 using Microsoft.Maui.Controls;
 using SharpHook.Native;
 using SnakeGame.Services;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
+
 public partial class MainPage : ContentPage
 {
     private readonly Dictionary<GridValue, ImageSource> gridValToImage = new()
@@ -25,19 +26,20 @@ public partial class MainPage : ContentPage
     GameState gameState;
     private bool isGameRunning = false;
 
-    TaskPoolGlobalHook hook;
+    TaskPoolGlobalHook keyboardHook;
 
     public MainPage()
     {
-        hook = new TaskPoolGlobalHook();
-        hook.KeyPressed += OnKeyPressed;
-        hook.RunAsync();
-
         InitializeComponent();
+
+        keyboardHook = new TaskPoolGlobalHook();
+        keyboardHook.KeyPressed += OnKeyPressed;
+        keyboardHook.RunAsync();
 
         gridImages = SetupGrid();
         gameState = new GameState(rows, cols);
     }
+
     private Image[,] SetupGrid()
     {
         Image[,] images = new Image[rows, cols];
@@ -66,13 +68,14 @@ public partial class MainPage : ContentPage
 
     private async void OnPressedStart(object sender, EventArgs e)
     {
-        if (!isGameRunning)
-        {
-            isGameRunning = true;
-            await RunGame();
-            OverlayText.IsVisible = true;
-            isGameRunning = false;
-        }
+        if (isGameRunning)
+            return;
+
+        isGameRunning = true;
+        await RunGame();
+        isGameRunning = false;
+        OverlayText.IsVisible = true;
+        gameState = new GameState(rows, cols);
     }
 
     private async Task RunGame()
@@ -81,7 +84,6 @@ public partial class MainPage : ContentPage
         Draw();
         await GameLoop();
         await DrawDeadSnake();
-        gameState = new GameState(rows, cols);
     }
 
     private async Task GameLoop()
@@ -89,7 +91,7 @@ public partial class MainPage : ContentPage
         while (!gameState.IsGameOver)
         {
             await Task.Delay(100);
-            gameState.Move();
+            gameState.MoveSnake();
             Draw();
         }
     }
@@ -122,6 +124,8 @@ public partial class MainPage : ContentPage
 
         int rotation = dirToRotate[gameState.Dir];
         image.Rotation = rotation;
+
+        Collection<int> ints = new();
     }
 
     private async Task DrawDeadSnake()
@@ -164,5 +168,23 @@ public partial class MainPage : ContentPage
             case SwipeDirection.Right:
                 gameState.ChangeDirection(Direction.Right); break;
         }
+    }
+    private void Up_Pressed(object sender, EventArgs e)
+    {
+        gameState.ChangeDirection(Direction.Up);
+    }
+    private void Down_Pressed(object sender, EventArgs e)
+    {
+        gameState.ChangeDirection(Direction.Down);
+    }
+
+    private void Left_Pressed(object sender, EventArgs e)
+    {
+        gameState.ChangeDirection(Direction.Left);
+    }
+
+    private void Right_Pressed(object sender, EventArgs e)
+    {
+        gameState.ChangeDirection(Direction.Right);
     }
 }

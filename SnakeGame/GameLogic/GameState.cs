@@ -80,7 +80,7 @@ public class GameState
         return dirBuffer.Last.Value;
     }
 
-    public void Move()
+    public void MoveSnake()
     {
         if (dirBuffer.Count > 0)
         {
