@@ -1,4 +1,4 @@
-﻿namespace SnakeGame.Services;
+﻿namespace SnakeGame.GameLogic;
 
 public class Position
 {

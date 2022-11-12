@@ -1,8 +1,8 @@
 ﻿namespace SnakeGame;
-using Microsoft.Maui.Controls;
+
+using SharpHook;
 using SharpHook.Native;
-using SnakeGame.Services;
-using System.Collections.ObjectModel;
+using SnakeGame.GameLogic;
 
 public partial class MainPage : ContentPage
 {
@@ -116,7 +116,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void DrawSnakeHead()
+    private void DrawSnakeHead() // Not used due to image not rotating properly
     {
         Position headPos = gameState.Snake.Head;
         Image image = gridImages[headPos.Row, headPos.Col];
@@ -124,8 +124,6 @@ public partial class MainPage : ContentPage
 
         int rotation = dirToRotate[gameState.Dir];
         image.Rotation = rotation;
-
-        Collection<int> ints = new();
     }
 
     private async Task DrawDeadSnake()
@@ -134,7 +132,7 @@ public partial class MainPage : ContentPage
         for (int i = 0; i < posistions.Count; i++)
         {
             Position pos = posistions[i];
-            //ImageSource source = (i == 0) ? Images.DeadHead : Images.DeadBody;
+            //ImageSource source = (i == 0) ? Images.DeadHead : Images.DeadBody; // Not used due to image not rotating properly
             gridImages[pos.Row, pos.Col].Source = Images.DeadBody;
             await Task.Delay(50);
         }
@@ -169,6 +167,7 @@ public partial class MainPage : ContentPage
                 gameState.ChangeDirection(Direction.Right); break;
         }
     }
+
     private void Up_Pressed(object sender, EventArgs e)
     {
         gameState.ChangeDirection(Direction.Up);
@@ -177,12 +176,10 @@ public partial class MainPage : ContentPage
     {
         gameState.ChangeDirection(Direction.Down);
     }
-
     private void Left_Pressed(object sender, EventArgs e)
     {
         gameState.ChangeDirection(Direction.Left);
     }
-
     private void Right_Pressed(object sender, EventArgs e)
     {
         gameState.ChangeDirection(Direction.Right);
