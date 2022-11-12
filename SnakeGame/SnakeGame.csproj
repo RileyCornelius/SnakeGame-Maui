@@ -48,6 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\JetBrainsMono-Regular.ttf" />
 	  <None Remove="Resources\Images\arrow.png" />
 	</ItemGroup>
 

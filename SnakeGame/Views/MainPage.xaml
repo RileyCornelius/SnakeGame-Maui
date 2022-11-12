@@ -3,13 +3,13 @@
     x:Class="SnakeGame.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SnakeGame">
+    xmlns:local="clr-namespace:SnakeGame"
+    BackgroundColor="{StaticResource Gray950}">
 
     <Grid
         x:Name="ScreenGrid"
         RowDefinitions="auto,auto,*"
-        HorizontalOptions="Center"
-        BackgroundColor="{StaticResource Gray950}">
+        HorizontalOptions="Center">
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
@@ -23,6 +23,7 @@
             Grid.Row="0"
             Margin="10,20"
             FontSize="22"
+            FontFamily="JetBrainsMonoRegular"
             TextColor="{StaticResource Gray200}"
             HorizontalTextAlignment="Start"
             VerticalTextAlignment="Center" />
@@ -32,6 +33,7 @@
             Grid.Row="0"
             Margin="10,20"
             FontSize="22"
+            FontFamily="JetBrainsMonoRegular"
             TextColor="{StaticResource Gray200}"
             HorizontalTextAlignment="End"
             VerticalTextAlignment="Center" />
@@ -55,6 +57,7 @@
             BackgroundColor="{StaticResource Gray200}"
             FontSize="Title"
             Text="PRESS TO START"
+            FontFamily="JetBrainsMonoRegular"
             TextColor="{StaticResource Tertiary}"
             Pressed="OnPressedStart"
             HeightRequest="70"

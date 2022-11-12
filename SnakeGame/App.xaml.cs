@@ -13,7 +13,7 @@ public partial class App : Application
         InitializeComponent();
 
 #if WINDOWS
-        int WindowWidth = 370;
+        int WindowWidth = 390;
         int WindowHeight = 720;
 
         Microsoft.Maui.Handlers.WindowHandler.Mapper.AppendToMapping(nameof(IWindow), (handler, view) =>
