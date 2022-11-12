@@ -8,6 +8,7 @@
     <Grid
         x:Name="ScreenGrid"
         RowDefinitions="auto,auto,*"
+        HorizontalOptions="Center"
         BackgroundColor="{StaticResource Gray950}">
 
         <Grid.GestureRecognizers>
@@ -64,6 +65,7 @@
             Grid.Row="2"
             RowDefinitions="auto,auto,auto"
             ColumnDefinitions="auto,auto,auto"
+            Margin="5"
             HorizontalOptions="Center"
             VerticalOptions="Center">
 
