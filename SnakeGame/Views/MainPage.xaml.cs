@@ -102,7 +102,7 @@ public partial class MainPage : ContentPage
     private void Draw()
     {
         DrawGrid();
-        //DrawSnakeHead();
+        DrawSnakeHead();
         ScoreText.Text = $"Score: {gameState.Score}";
         HighScoreText.Text = $"High Score: {gameState.HighScore}";
     }
@@ -120,26 +120,35 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void DrawSnakeHead() // Not used due to image not rotating properly
+    private void DrawSnakeHead()
     {
+#if !WINDOWS // Dont draw head on windows do to fickering bug
         Position headPos = gameState.Snake.Head;
         Image image = gridImages[headPos.Row, headPos.Col];
         image.Source = Images.Head;
-
-        int rotation = dirToRotate[gameState.Dir];
-        image.Rotation = rotation;
+        image.Rotation = dirToRotate[gameState.Dir];
+#endif
     }
 
     private async Task DrawDeadSnake()
     {
         List<Position> posistions = new List<Position>(gameState.Snake.Body);
+#if !WINDOWS // Dont draw dead head on windows do to fickering bug
+        gridImages[posistions[0].Row, posistions[0].Col].Source = Images.DeadHead;
+        for (int i = 1; i < posistions.Count; i++)
+        {
+            Position pos = posistions[i];
+            gridImages[pos.Row, pos.Col].Source = Images.DeadBody;
+            await Task.Delay(75);
+        }
+#else
         for (int i = 0; i < posistions.Count; i++)
         {
             Position pos = posistions[i];
-            //ImageSource source = (i == 0) ? Images.DeadHead : Images.DeadBody; // Not used due to image not rotating properly
             gridImages[pos.Row, pos.Col].Source = Images.DeadBody;
-            await Task.Delay(50);
+            await Task.Delay(75);
         }
+#endif
     }
 
     void OnKeyPressed(object sender, KeyboardHookEventArgs e)
