@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SnakeGame">
 
-    <Grid x:Name="ScreenGrid" RowDefinitions="*,auto,auto">
+    <Grid x:Name="ScreenGrid" RowDefinitions="auto,auto,*">
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
@@ -17,10 +17,18 @@
         <Label
             x:Name="ScoreText"
             Grid.Row="0"
+            Margin="20"
+            FontSize="22"
+            HorizontalTextAlignment="Start"
+            VerticalTextAlignment="Center"
+            Text="Score 0" />
+
+        <Label
+            x:Name="HighScoreText"
+            Grid.Row="0"
             Margin="10"
-            FontSize="25"
-            HorizontalTextAlignment="Center"
-            Text="Score 0"
+            FontSize="22"
+            HorizontalTextAlignment="End"
             VerticalTextAlignment="Center" />
 
         <Border

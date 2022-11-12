@@ -7,6 +7,7 @@ public class GameState
     public GridValue[,] Grid { get; }
     public Direction Dir { get; private set; }
     public int Score { get; private set; }
+    public int HighScore { get; private set; }
     public bool IsGameOver { get; private set; }
 
     public readonly Snake Snake = new Snake();
@@ -19,6 +20,7 @@ public class GameState
         Cols = cols;
         Grid = new GridValue[Rows, Cols];
         Dir = Direction.Right;
+        HighScore = Preferences.Default.Get("HighScore", 0);
 
         AddSnake();
         AddFood();
@@ -102,9 +104,19 @@ public class GameState
         }
         else if (hit == GridValue.Food)
         {
-            Score++;
             AddHead(newHeadPos);
             AddFood();
+            AddScore();
+        }
+    }
+
+    private void AddScore()
+    {
+        Score++;
+        if (HighScore < Score)
+        {
+            HighScore = Score;
+            Preferences.Set("HighScore", HighScore);
         }
     }
 

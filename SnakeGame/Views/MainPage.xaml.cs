@@ -38,6 +38,9 @@ public partial class MainPage : ContentPage
 
         gridImages = SetupGrid();
         gameState = new GameState(rows, cols);
+
+        ScoreText.Text = $"Score: {gameState.Score}";
+        HighScoreText.Text = $"High Score: {gameState.HighScore}";
     }
 
     private Image[,] SetupGrid()
@@ -100,7 +103,8 @@ public partial class MainPage : ContentPage
     {
         DrawGrid();
         //DrawSnakeHead();
-        ScoreText.Text = $"Score {gameState.Score}";
+        ScoreText.Text = $"Score: {gameState.Score}";
+        HighScoreText.Text = $"High Score: {gameState.HighScore}";
     }
 
     private void DrawGrid()
